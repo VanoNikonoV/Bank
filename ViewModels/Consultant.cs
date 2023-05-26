@@ -228,7 +228,9 @@ namespace Bank.ViewModels
 
             set { Set(ref isValid, value, "IsValid"); }
         }
-
+        /// <summary>
+        /// Список ощибок выявленных при проверке
+        /// </summary>
         public List<string> ErrorDataClient
         {
             get => errorDataClient;
@@ -304,21 +306,18 @@ namespace Bank.ViewModels
 
             Client.Owner.Telefon = telefon;
 
-            bool equals = telefon.Equals(currentTelefon); // значения равны
+            bool equal = telefon.Equals(currentTelefon);
 
-            BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+            if (ValidateCustomer(Client.Owner, "Telefon") && !equal)
+            {
+                BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID); //try client == null
 
-            if (ValidateCustomer(Client.Owner, "Telefon") &&  !equals)
-            { 
-                client.Owner.Telefon= telefon;
+                client.Owner.Telefon = telefon;
 
                 OnEditClient?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
                 $"Замена {currentTelefon} на {telefon}", Client.Owner.ID));
             }
-            else
-            {
-                Client.Owner.Telefon = currentTelefon;
-            }
+            else { Client.Owner.Telefon = currentTelefon; }
         }
         #endregion
 
@@ -630,8 +629,6 @@ namespace Bank.ViewModels
                 this.ErrorDataClient = tempError;
 
                 if (tempError.Count > 0) { this.IsValid = true; } //показывать Popup
-
-                if (tempError.Count == 0) { this.IsValid = false; } //непоказывать Popup
 
                 return tempError.Count > 0 ?  false : true;
             } 

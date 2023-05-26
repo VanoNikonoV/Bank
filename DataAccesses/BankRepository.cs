@@ -15,7 +15,7 @@ namespace Bank.DataAccesses
     {
         public BankRepository(string path = "")
         {
-            LoadData(path);  
+           LoadData(path);  
             //GetClientsRep(50);
         }
 

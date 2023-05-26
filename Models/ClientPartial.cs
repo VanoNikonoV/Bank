@@ -1,4 +1,5 @@
 ﻿using Bank.Validators;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Bank.Models
     public partial class Client : INotifyPropertyChanged, IDataErrorInfo, IEquatable<Client>
     {
         #region IDataErrorInfo
+        [JsonIgnore]
         public string this[string columnName]
         {
             get
@@ -25,6 +27,7 @@ namespace Bank.Models
                 return firstOrDefault?.ErrorMessage;
             }
         }
+        [JsonIgnore]
         public string Error
         {
             get

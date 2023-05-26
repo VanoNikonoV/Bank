@@ -6,15 +6,12 @@ using Bank.Interfases;
 namespace Bank.Models
 {
     //https://learn.microsoft.com/ru-ru/dotnet/csharp/fundamentals/tutorials/oop
+    /* abstract Could not create an instance of type Bank.Models.Account. 
+    * Type is an interface or abstract class and cannot be instantiated.
+    * Path '[0].Deposit.Number', line 13, position 15."
+    */
 
-    //    Сделайте так, чтобы в журнале отражались время операции и имя совершившего операцию(консультанта или менеджера) при:
-    // •	открытии счёта;
-    // •	закрытии счёта; 
-    // •	пополнении счёта;
-    // •	переводе между счетами;
-    // •	изменении данных клиента.
-
-    public class Account : INotifyPropertyChanged
+    public class Account : INotifyPropertyChanged  
     {
         /// <summary>
         /// Номер счета

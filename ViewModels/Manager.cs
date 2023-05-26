@@ -81,20 +81,19 @@ namespace Bank.ViewModels
 
             Client.Owner.FirstName = newName;
 
-            BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+            bool equal = newName.Equals(current);
 
-            if (client != null && ValidateCustomer(Client.Owner, "FirstName"))
+            if (ValidateCustomer(Client.Owner, "FirstName") && !equal)
             {
+                BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+
                 client.Owner.FirstName = newName;
 
                 OnEditClientForManager?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
 
                 $"Замена {current} на {newName}", Client.Owner.ID));
             }
-            else
-            {
-                Client.Owner.FirstName = current;
-            }
+            else { Client.Owner.FirstName = current; }
         }
 
         /// <summary>
@@ -107,20 +106,19 @@ namespace Bank.ViewModels
 
             Client.Owner.MiddleName = newMiddleName;
 
-            BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+            bool equal = newMiddleName.Equals(current);
 
-            if (client != null && ValidateCustomer(Client.Owner, "MiddleName"))
+            if ( ValidateCustomer(Client.Owner, "MiddleName") && !equal)
             {
+                BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+
                 client.Owner.MiddleName = newMiddleName;
 
                 OnEditClientForManager?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
 
                 $"Замена {current} на {newMiddleName}", Client.Owner.ID));
             }
-            else
-            {
-                Client.Owner.MiddleName = current;
-            }
+            else { Client.Owner.MiddleName = current; }
         }
 
         /// <summary>
@@ -133,20 +131,19 @@ namespace Bank.ViewModels
 
             Client.Owner.SecondName = newSecondName;
 
-            BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+            bool equal = newSecondName.Equals(current);
 
-            if (client != null && ValidateCustomer(Client.Owner, "SecondName"))
+            if (ValidateCustomer(Client.Owner, "SecondName")&& !equal)
             {
+                BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+
                 client.Owner.SecondName = newSecondName;
 
                 OnEditClientForManager?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
 
                 $"Замена {current} на {newSecondName}", Client.Owner.ID));
             }
-            else
-            {
-                Client.Owner.SecondName = current;
-            }
+            else { Client.Owner.SecondName = current; }
         }
 
         /// <summary>
@@ -159,20 +156,19 @@ namespace Bank.ViewModels
 
             Client.Owner.SeriesAndPassportNumber = passport;
 
-            BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+            bool equal = passport.Equals(current);
 
-            if (client != null && ValidateCustomer(Client.Owner, "SeriesAndPassportNumber"))
+            if (ValidateCustomer(Client.Owner, "SeriesAndPassportNumber") && !equal)
             {
+                BankClient<Account> client = BankClients.Find(i => i.Owner.ID == Client.Owner.ID);
+
                 client.Owner.SeriesAndPassportNumber = passport;
 
                 OnEditClientForManager?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
 
                 $"Замена {current} на {passport}", Client.Owner.ID));
             }
-            else
-            {
-                Client.Owner.SeriesAndPassportNumber = current;
-            }
+            else { Client.Owner.SeriesAndPassportNumber = current; }
         }
         #endregion
     }

@@ -49,21 +49,21 @@ namespace Bank.ViewModels
                 return true;
             }
 
-            foreach (var error in result.Errors)
-            {
-                string path = Directory.GetCurrentDirectory() + @"\Images\A_logo.png";
+            //foreach (var error in result.Errors)
+            //{
+            //    string path = Directory.GetCurrentDirectory() + @"\Images\A_logo.png";
 
-                new ToastContentBuilder()
-                    .AddArgument("visual", "viewConversation")
-                    .AddArgument("conversationId", 9813)
-                    .AddText("Ощибка в данных")
-                    .AddText($"{error.ErrorMessage}")
-                    .AddAppLogoOverride(new Uri(path), ToastGenericAppLogoCrop.Circle)
-                    .Show(toast =>
-                    {
-                        toast.ExpirationTime = DateTime.Now.AddMilliseconds(1000);
-                    });
-            }
+            //    new ToastContentBuilder()
+            //        .AddArgument("visual", "viewConversation")
+            //        .AddArgument("conversationId", 9813)
+            //        .AddText("Ощибка в данных")
+            //        .AddText($"{error.ErrorMessage}")
+            //        .AddAppLogoOverride(new Uri(path), ToastGenericAppLogoCrop.Circle)
+            //        .Show(toast =>
+            //        {
+            //            toast.ExpirationTime = DateTime.Now.AddMilliseconds(1000);
+            //        });
+            //}
             return false;
         }
 

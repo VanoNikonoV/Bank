@@ -12,22 +12,23 @@ namespace Bank.Validators
     {
         public ClientValidator()
         {
-            RuleFor(vm => vm.FirstName)
+            RuleFor(client => client.FirstName)
                 .NotEmpty().WithMessage("Имя не заполнено")
-                .Must(vm => vm.All(Char.IsLetter)).WithMessage("Имя должно собержать только буквы")
+                .Must(client => client.All(Char.IsLetter)).WithMessage("Имя должно собержать только буквы")
                 .Must(ExpansionString.StartsWithUpper).WithMessage("Имя должно начинаться с заглавной буквы");
+                //.NotEqual(client => client.FirstName).WithMessage("Значения равны");
 
-            RuleFor(vm => vm.MiddleName)
+            RuleFor(client => client.MiddleName)
                 .NotEmpty().WithMessage("Отчество не заполнено")
-                .Must(vm => vm.All(Char.IsLetter)).WithMessage("Отчество  должно собержать только буквы")
-                .Must(ExpansionString.StartsWithUpper).WithMessage("Отчество должно начинаться с заглавной буквы"); ;
+                .Must(client => client.All(Char.IsLetter)).WithMessage("Отчество  должно собержать только буквы")
+                .Must(ExpansionString.StartsWithUpper).WithMessage("Отчество должно начинаться с заглавной буквы"); 
 
-            RuleFor(vm => vm.SecondName)
+            RuleFor(client => client.SecondName)
                 .NotEmpty().WithMessage("Фамилия не заполнена")
-                .Must(vm => vm.All(Char.IsLetter)).WithMessage("Фамилия должно собержать только буквы")
-                .Must(ExpansionString.StartsWithUpper).WithMessage("Фамилия должно начинаться с заглавной буквы"); ;
+                .Must(client => client.All(Char.IsLetter)).WithMessage("Фамилия должно собержать только буквы")
+                .Must(ExpansionString.StartsWithUpper).WithMessage("Фамилия должно начинаться с заглавной буквы");
 
-            RuleFor(vm => vm.SeriesAndPassportNumber)
+            RuleFor(client => client.SeriesAndPassportNumber)
                 .NotEmpty().WithMessage("Паспортные данные не заполнены");
 
             RuleFor(t => t.Telefon)
