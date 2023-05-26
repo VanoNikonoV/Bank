@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -317,7 +318,7 @@ namespace Bank.ViewModels
                 OnEditClient?.Invoke(new InformationAboutChanges(DateTime.Now, this.GetType().Name,
                 $"Замена {currentTelefon} на {telefon}", Client.Owner.ID));
             }
-            else { Client.Owner.Telefon = currentTelefon; }
+            else { Client.Owner.Telefon = currentTelefon; SystemSounds.Beep.Play(); }
         }
         #endregion
 

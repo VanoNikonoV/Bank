@@ -2,11 +2,7 @@
 using Bank.DataAccesses;
 using Bank.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Media;
 
 namespace Bank.ViewModels
 {
@@ -93,7 +89,7 @@ namespace Bank.ViewModels
 
                 $"Замена {current} на {newName}", Client.Owner.ID));
             }
-            else { Client.Owner.FirstName = current; }
+            else { Client.Owner.FirstName = current; SystemSounds.Beep.Play(); }
         }
 
         /// <summary>
@@ -118,7 +114,7 @@ namespace Bank.ViewModels
 
                 $"Замена {current} на {newMiddleName}", Client.Owner.ID));
             }
-            else { Client.Owner.MiddleName = current; }
+            else { Client.Owner.MiddleName = current; SystemSounds.Beep.Play(); }
         }
 
         /// <summary>
@@ -143,7 +139,7 @@ namespace Bank.ViewModels
 
                 $"Замена {current} на {newSecondName}", Client.Owner.ID));
             }
-            else { Client.Owner.SecondName = current; }
+            else { Client.Owner.SecondName = current; SystemSounds.Beep.Play(); }
         }
 
         /// <summary>
@@ -168,7 +164,7 @@ namespace Bank.ViewModels
 
                 $"Замена {current} на {passport}", Client.Owner.ID));
             }
-            else { Client.Owner.SeriesAndPassportNumber = current; }
+            else { Client.Owner.SeriesAndPassportNumber = current; SystemSounds.Beep.Play(); }
         }
         #endregion
     }
