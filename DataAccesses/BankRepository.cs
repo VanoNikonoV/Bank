@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 
 namespace Bank.DataAccesses
 {
@@ -13,7 +14,7 @@ namespace Bank.DataAccesses
     /// </summary>
     public class BankRepository : List<BankClient<Account>>
     {
-        public BankRepository(string path = "")
+        public BankRepository(string path)
         {
            LoadData(path);  
             //GetClientsRep(50);
@@ -25,35 +26,48 @@ namespace Bank.DataAccesses
         /// <param name="path">Путь к файлу</param>
         private void LoadData(string path)
         {
-            if (File.Exists(path)) 
-            { 
-                string json = File.ReadAllText(path);
-
-                List<BankClient<Account>> temp = JsonConvert.DeserializeObject<List<BankClient<Account>>>(json);
-
-                // Нужно установить ID клиента после десериадизации
-
-                foreach (BankClient<Account> client in temp)
+            try
+            {
+                if (File.Exists(path))
                 {
-                    // вызывается коструктор Клиента для интерации статического свойства ID
+                    string json = File.ReadAllText(path);
 
+                    List<BankClient<Account>> temp = JsonConvert.DeserializeObject<List<BankClient<Account>>>(json);
 
+                    foreach (BankClient<Account> client in temp)
+                    {   // вызывается коструктор Клиента для интерации статического свойства ID
 
-                    BankClient<Account> tempClient = new BankClient<Account>
-                                    (new Client(firstName: client.Owner.FirstName,
-                                               middleName: client.Owner.MiddleName,
-                                               secondName: client.Owner.SecondName,
-                                                  telefon: client.Owner.Telefon,
-                                  seriesAndPassportNumber: client.Owner.SeriesAndPassportNumber,
-                                                 dateTime: client.Owner.DateOfEntry));
+                        BankClient<Account> tempClient = new BankClient<Account>
+                                        (new Client(firstName: client.Owner.FirstName,
+                                                   middleName: client.Owner.MiddleName,
+                                                   secondName: client.Owner.SecondName,
+                                                      telefon: client.Owner.Telefon,
+                                      seriesAndPassportNumber: client.Owner.SeriesAndPassportNumber,
+                                                     dateTime: client.Owner.DateOfEntry));
 
-                    tempClient.AddAccount(AccountType.Deposit, client.Deposit.Balance);
+                        tempClient.AddAccount(AccountType.Deposit, client.Deposit.Balance);
 
-                    tempClient.AddAccount(AccountType.NoDeposit, client.NoDeposit.Balance);
+                        tempClient.AddAccount(AccountType.NoDeposit, client.NoDeposit.Balance);
 
-                    this.Add(tempClient);
+                        this.Add(tempClient);
+                    }
                 }
-            }      
+                else
+                {
+                    File.Create(path).Close();
+                }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                path = Environment.CurrentDirectory + @"\Data\Default.json";
+                File.Create(path).Close();
+            }
+            
         }
 
         private ObservableCollection<InformationAboutChanges> logClient;

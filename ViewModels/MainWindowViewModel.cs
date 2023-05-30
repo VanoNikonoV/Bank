@@ -18,7 +18,7 @@ namespace Bank.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-        public MainWindowViewModel(string clientsDataFile = "")
+        public MainWindowViewModel(string clientsDataFile)
         {
             bankRepository = new BankRepository(clientsDataFile);
 

@@ -57,8 +57,6 @@ namespace Bank.View
 
         private void CloseWindows(object sender, RoutedEventArgs e)
         {
-            ToastNotificationManagerCompat.Uninstall();
-
             Application.Current.Shutdown();
         }
 

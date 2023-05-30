@@ -22,9 +22,11 @@ namespace Bank
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            //base.OnStartup(e);
+            base.OnStartup(e);
 
-            string path = Directory.GetCurrentDirectory() + @"\Data\ClientsBank.json";
+            //string path = Directory.GetCurrentDirectory() + @"\Data\ClientsBank.json";
+
+            string path = null;
 
             MainWindow window = new MainWindow();
 
