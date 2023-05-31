@@ -30,29 +30,6 @@ namespace Bank.View
         public MainWindow()
         {
             InitializeComponent();
-
-            // SAVE ctrl + s
-
-            //MainGrid.KeyDown += (s, e) =>
-            //{
-            //    if (e.Key == Key.Return)
-            //    {
-            //        var curUser = usersList.SelectedItem as TelegramUser;
-
-            //        if (curUser != null && !string.IsNullOrWhiteSpace(txtMsgSend.Text))
-            //        {
-            //            client.SendMessage(txtMsgSend.Text, TargetSend.Text, curUser);
-
-            //            MessageLog.SaveFile(client.Users);
-
-            //            txtMsgSend.Text = string.Empty;
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Выберите пользователя", caption: nameof(TelegramMessageClient));
-            //        }
-            //    }
-            //};
         }
 
         private void CloseWindows(object sender, RoutedEventArgs e)
