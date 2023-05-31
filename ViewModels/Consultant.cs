@@ -4,17 +4,11 @@ using Bank.Interfases;
 using Bank.Models;
 using Bank.Validators;
 using FluentValidation;
-using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Media;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Notifications;
 
 namespace Bank.ViewModels
 {
@@ -34,6 +28,7 @@ namespace Bank.ViewModels
             this.validator = new ClientValidator();
 
             this.errorDataClient = new List<string>();
+            
         }
 
         /// <summary>

@@ -12,7 +12,6 @@ namespace Bank.View
         public NewClientWindow()
         {
             InitializeComponent();
-
         }
         /// <summary>
         /// Зактытие окна

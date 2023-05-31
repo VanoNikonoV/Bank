@@ -66,6 +66,7 @@ namespace Bank.ViewModels
                                    isChanged: true);
 
             _window.DialogResult = true;
+            
         }   
 
     }

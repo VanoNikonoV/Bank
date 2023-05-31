@@ -8,18 +8,14 @@ namespace Bank.ViewModels
     ///  Этот подкласс ViewModelBase запрашивает удаление из пользовательского интерфейса при выполнении его команды Close.
     /// </summary>
     public abstract class WorkspaceViewModel:ViewModel
-    {
-       
-
+    { 
         #region Constructor
 
         protected WorkspaceViewModel()
         {
         }
 
-        #endregion // Constructor
-
-       
+        #endregion // Constructor     
 
         #region RequestClose [event]
 
