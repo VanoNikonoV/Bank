@@ -105,8 +105,7 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid x:Name="MainGrid"
-          ShowGridLines="False"  
+    <Grid ShowGridLines="False"  
           MouseDown="Grid_MouseDown" 
           MouseLeftButtonDown="Gride_MouseLeftButtonDown">
         <Grid.RowDefinitions>

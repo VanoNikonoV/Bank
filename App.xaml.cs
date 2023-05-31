@@ -37,6 +37,7 @@ namespace Bank
 
             string path = Directory.GetCurrentDirectory() + @"\Data\ClientsBank.json";
 
+            //Проверка исключения
             //string path = null; 
 
             MainWindow window = new MainWindow();

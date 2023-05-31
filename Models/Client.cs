@@ -81,7 +81,7 @@ namespace Bank.Models
                          (firstName, middleName,
                          secondName, telefon,
                          seriesAndPassportNumber, dateTime,
-                         currentId, false); 
+                         currentId, isChanged); 
 
         // для загрузки данных
         public Client(string firstName, string middleName,

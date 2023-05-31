@@ -13,6 +13,7 @@ using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace Bank.ViewModels
 {
@@ -211,7 +212,21 @@ namespace Bank.ViewModels
                     OnEditClient(new InformationAboutChanges(DateTime.Now, this.EmployeeType,
                         $"Добавлен новый клиетна с ID: {newAccount.Owner.ID}", newAccount.Owner.ID));
                 }
-                else ShowStatusBarText("Клиент с такими данными уже существует");
+                else
+                {
+                    string path = Directory.GetCurrentDirectory() + @"\Images\A_logo.png";
+
+                    new ToastContentBuilder()
+                        .AddArgument("visual", "viewConversation")
+                        .AddArgument("conversationId", 9813)
+                        .AddText("Ощибка в данных")
+                        .AddText($"Клиент с такими данными уже существует")
+                        .AddAppLogoOverride(new Uri(path), ToastGenericAppLogoCrop.Circle)
+                        .Show(toast =>
+                        {
+                            toast.ExpirationTime = DateTime.Now.AddMilliseconds(1000);
+                        });
+                }
             }
         }
         #endregion
@@ -233,7 +248,9 @@ namespace Bank.ViewModels
             {
                 foreach (var client in BankRepository) //или AllClient?
                 {
-                    if (client.Owner.IsChanged == true) { return true; }
+                    if (client.Owner.IsChanged == true) 
+                    
+                    { return true; }
 
                     else return false;
                 }
@@ -361,32 +378,6 @@ namespace Bank.ViewModels
             }
 
             else return "нет данных";
-        }
-
-        public void ShowStatusBarText(string message)
-        {
-            TextBlock statusBar = Application.Current.MainWindow.FindName("StatusBarText") as TextBlock;
-
-            statusBar.Text = message;
-
-            var timer = new System.Timers.Timer();
-
-            timer.Interval = 2000;
-
-            timer.Elapsed += delegate (object sender, System.Timers.ElapsedEventArgs e)
-            {
-                timer.Stop();
-                //удалите текст сообщения о состоянии с помощью диспетчера, поскольку таймер работает в другом потоке
-                Application.Current.MainWindow.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    statusBar.Text = "";
-                }));
-
-                //System.InvalidOperationException: "Вызывающий поток не может получить доступ к данному объекту,
-                //так как владельцем этого объекта является другой поток."
-
-            };
-            timer.Start();
         }
     }
 }

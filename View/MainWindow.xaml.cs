@@ -1,24 +1,6 @@
-﻿using Bank.DataAccesses;
-using Bank.Models;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bank.View
 {
@@ -34,6 +16,8 @@ namespace Bank.View
 
         private void CloseWindows(object sender, RoutedEventArgs e)
         {
+            ToastNotificationManagerCompat.Uninstall();
+
             Application.Current.Shutdown();
         }
 
