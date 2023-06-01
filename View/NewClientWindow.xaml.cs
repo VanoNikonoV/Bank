@@ -13,21 +13,9 @@ namespace Bank.View
         {
             InitializeComponent();
         }
-        /// <summary>
-        /// Зактытие окна
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
-        }
-
+        
         private bool isFocused = false;
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            isFocused = true;
-        }
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e) { isFocused = true;}
 
         private void TextBox_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -37,8 +25,9 @@ namespace Bank.View
                 (sender as TextBox).SelectAll();
             }
         }
+
         /// <summary>
-        /// Перемещение окна
+        /// Перемещение окна по рабочему столу
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

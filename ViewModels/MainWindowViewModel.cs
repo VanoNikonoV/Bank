@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
-using System.Windows.Data;
 using Bank.Cmds;
 using Bank.View;
-using System.Windows.Controls;
 using System.Windows;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -23,7 +21,7 @@ namespace Bank.ViewModels
         {
             bankRepository = new BankRepository(clientsDataFile);
 
-            AllClients = CollectionViewSource.GetDefaultView(ViewClientsData(BankRepository));
+            AllClients = System.Windows.Data.CollectionViewSource.GetDefaultView(ViewClientsData(BankRepository));
 
             employeesTypeOptions = new string[2] { "Консультант", "Менеджер"};
 
@@ -52,9 +50,11 @@ namespace Bank.ViewModels
 
         public WorkspaceViewModel workspaces;
 
-        private ICollectionView allClients;
+        private System.ComponentModel.ICollectionView allClients;
 
         private BankClient<Account> currentClient;
+
+        private bool isSorted = false;
         #endregion
 
         #region Свойства
@@ -77,7 +77,7 @@ namespace Bank.ViewModels
         /// <summary>
         /// Коллекция всех клиентов для отображения во View
         /// </summary>
-        public ICollectionView AllClients
+        public System.ComponentModel.ICollectionView AllClients
         {
             get => allClients;
 
@@ -119,12 +119,12 @@ namespace Bank.ViewModels
 
                 if (employeeType == employeesTypeOptions[0])
                 {
-                    this.AllClients = CollectionViewSource.GetDefaultView(ViewClientsData(BankRepository));
+                    this.AllClients = System.Windows.Data.CollectionViewSource.GetDefaultView(ViewClientsData(BankRepository));
                 }
 
                 if (employeeType == employeesTypeOptions[1])
                 {
-                    this.AllClients = CollectionViewSource.GetDefaultView(BankRepository);
+                    this.AllClients = System.Windows.Data.CollectionViewSource.GetDefaultView(BankRepository);
                 }
                 base.OnPropertyChanged(nameof(EmployeeType));
             }
@@ -156,7 +156,31 @@ namespace Bank.ViewModels
         public RelayCommand SaveRepoCommand =>
             saveRepoCommand ?? (saveRepoCommand = new RelayCommand(SaveRepo, CanSaveRepo));
 
+        private RelayCommand sortCommand = null;
+
+        public RelayCommand SortCommand =>
+            sortCommand ?? (sortCommand = new RelayCommand(SortBankRepository, null));
+
         #endregion
+
+        /// <summary>
+        /// Сортировка данных о клиентах по алфавиту
+        /// </summary>
+        private void SortBankRepository()
+        {
+            if (isSorted == false) 
+            {           
+                AllClients.SortDescriptions.Add(new SortDescription("FirstName", ListSortDirection.Ascending));
+
+                isSorted = true;
+            }
+            else
+            {
+                AllClients.SortDescriptions.Clear();
+
+                isSorted = false;
+            }   
+        }
 
         #region Методы для опраций с клиентом
 
@@ -258,6 +282,9 @@ namespace Bank.ViewModels
             return false;
         }
 
+        /// <summary>
+        /// Сохранение всех данных о клиенте
+        /// </summary>
         private void SaveRepo()
         {
             var saveDlg = new SaveFileDialog { Filter = "Text files|*.json" , InitialDirectory = Directory.GetCurrentDirectory()};

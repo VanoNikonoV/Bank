@@ -271,6 +271,15 @@
                                      Cursor="Hand" Foreground="#DD080808"/>
                 </Button>
 
+                <Button ToolTip="Coртировать по алфавиту"
+                        Background="{x:Null}" BorderBrush="{x:Null}"
+                        Cursor="Hand" HorizontalAlignment="Left" 
+                        Command="{Binding SortCommand}">
+                    <materialDesign:PackIcon Kind="SortAlphabeticalDescending" 
+                                     Width="25" Height="25" HorizontalAlignment="Center" 
+                                     Cursor="Hand" Foreground="#DD080808"/>
+                </Button>
+
                 <Button x:Name="DelitClient_Button" ToolTip="Удалить клиента"
                 Background="{x:Null}" BorderBrush="{x:Null}"
                 Cursor="Hand" HorizontalAlignment="Left" 
