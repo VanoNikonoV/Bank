@@ -11,6 +11,7 @@
         FocusManager.FocusedElement ="{Binding ElementName=TelefonTextBox}" 
         AllowsTransparency="True" WindowStyle="None"
         Width="400" Height="250">
+    
     <Window.Resources>
 
         <Style TargetType="{x:Type TextBox}">
@@ -74,7 +75,11 @@
                 <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" 
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Margin="0 0 10 10" IsCancel="True" 
-                    Click="Cancel">
+                    Command="{Binding Path= CancelCommand}"
+                    CommandParameter="{Binding Mode=OneWay, 
+                    RelativeSource={RelativeSource FindAncestor, 
+                    AncestorType={x:Type local:NewClientWindow}}}"
+                    Cursor="Hand">
                     <materialDesign:PackIcon Kind="CloseOutline" 
                                              Width="30" Height="30" 
                                              HorizontalAlignment="Center" 
@@ -86,6 +91,9 @@
                     Margin="0,0,77,6" IsDefault="True"
                     Width="62" Height="40"
                     Command="{Binding Path=AddClientCommand}"
+                    CommandParameter="{Binding Mode=OneWay, 
+                    RelativeSource={RelativeSource FindAncestor, 
+                    AncestorType={x:Type local:NewClientWindow}}}"
                     Cursor="Hand">
                     <materialDesign:PackIcon Kind="AddCircleOutline" 
                                              Width="30" Height="30" 
@@ -116,25 +124,19 @@
 
                     <StackPanel Margin="10" Grid.Column="0" HorizontalAlignment="Center">
                         <TextBlock Text="Телефон"/>
-                        <TextBox x:Name="TelefonTextBox" 
-                                 Width="150"
+                        <TextBox Width="150"
                                  GotFocus="TextBox_GotFocus"
-                                 SelectionChanged="TextBox_SelectionChanged">
-                            <TextBox.Text>
-                                <Binding Path="Telefon"
-                                         UpdateSourceTrigger="LostFocus" Mode="TwoWay">
-                                    <Binding.ValidationRules>
-                                        <DataErrorValidationRule/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
+                                 SelectionChanged="TextBox_SelectionChanged"
+                                 Text="{Binding Path=Telefon, 
+                                 UpdateSourceTrigger=PropertyChanged, 
+                                 Mode=TwoWay, 
+                                 ValidatesOnDataErrors=True}">
                         </TextBox>
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Center">
                         <TextBlock Text="Серия и номер паспорта"/>
-                        <TextBox x:Name="SeriesAndPassportNumberTextBox" 
-                                 Width="170"  
+                        <TextBox Width="170"  
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -160,8 +162,7 @@
 
                     <StackPanel Margin="10" Grid.Column="0" HorizontalAlignment="Left">
                         <TextBlock Text="Имя"/>
-                        <TextBox x:Name="FirstNameTextBox"
-                                 Width="100" 
+                        <TextBox Width="100" 
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -177,8 +178,7 @@
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Left">
                         <TextBlock Text="Отчество" />
-                        <TextBox x:Name="MidlleNameTextBox"
-                                 Width="114"
+                        <TextBox Width="114"
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -194,8 +194,7 @@
 
                     <StackPanel Margin="10" Grid.Column="2" HorizontalAlignment="Left">
                         <TextBlock Text="Фамилия"/>
-                        <TextBox x:Name="SecondNameTextBox" 
-                                 Width="100" 
+                        <TextBox Width="100" 
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -206,14 +205,10 @@
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
-
                         </TextBox>
                     </StackPanel>
-
                 </Grid>
-
             </Grid>
         </Border>
-
     </StackPanel>
 </Window>

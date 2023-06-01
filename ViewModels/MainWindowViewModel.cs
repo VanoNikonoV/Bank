@@ -193,7 +193,7 @@ namespace Bank.ViewModels
         {
             NewClientWindow _windowNewClient = new NewClientWindow() { Owner = Application.Current.MainWindow };
 
-            NewClientWindowViewModel newClientVM = new NewClientWindowViewModel(_windowNewClient);
+            NewClientWindowViewModel newClientVM = new NewClientWindowViewModel();
 
             _windowNewClient.DataContext = newClientVM;
 
