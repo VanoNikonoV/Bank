@@ -95,10 +95,6 @@
     <Compile Include="View\NewClientWindow.xaml.cs">
       <DependentUpon>NewClientWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindowResources.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ConsultantUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
